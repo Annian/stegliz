@@ -1,0 +1,198 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name"viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=1.0, user-scalable=no">
+<title> Pangea</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="animate.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/2014.01.31/classList.min.js" type="text/javascript"></script>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+
+</head>
+<body>
+<a href="index.html" class="logo">P</a>
+<a id="hamburger-icon" href="#" class="open-close-btn">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</a>
+<div id="myNav" class="overlay">
+<div class="overlay-content">
+<a href="#">***</a>
+<a href="company.html">company</a></a>
+<a href="contact.html">contact</a>
+</div>
+</div>
+<!-------------------------------------------->
+<section id="contact" class="section">
+<div class="centered">
+<div class="container">
+  <div class="inner">
+    <div class="panel panel-right">
+      <div class="panel-content">
+        <div class="form">
+          <h1>Leave a comment</h1>
+          <div class="group">
+            <input type="text" required>
+            <span class="highlight"></span>
+            <label>Your name</label>
+          </div>
+          <div class="group">
+            <input type="text" required>
+            <span class="highlight"></span>
+            <label>Your email</label>
+          </div>
+          <a class="send-btn">Send</a>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-left">
+      <div class="panel-content">
+        <div class="image-background">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+</section>
+<div class="footer-copyright default_color">
+<div class="">Made by Asurias</div>
+</div>
+<script>
+$(document).ready(function(){
+$(".open-close-btn").on('click touchstart', function(e) {
+e.preventDefault();
+$(".overlay").toggleClass("overlay-open");
+$("#hamburger-icon").toggleClass("hamburger-open");
+});
+$('section').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+$('section').addClass('delay fadeOutRight');});
+});
+$(function() {
+	var canvas = document.querySelector('canvas'),
+      ctx = canvas.getContext('2d'),
+      color = '#300a1a';
+
+   var w = window.innerWidth;
+   var h = window.innerHeight;
+   canvas.width = w;
+	canvas.height = h;
+	ctx.fillStyle = color;
+	ctx.lineWidth = .1;
+	ctx.strokeStyle = color;
+
+	var mousePosition = {
+		x: 10 * w / 100,
+		y: 10 * h / 100
+	};
+
+	var dots = {
+    num: 100,
+    distance: 200,
+    d_radius: 200,
+    velocity: -.9,
+    array: []
+	};
+
+	function Dot(){
+		this.x = Math.random() * w;
+		this.y = Math.random() * h;
+
+		this.vx = dots.velocity + Math.random();
+		this.vy = dots.velocity + Math.random();
+
+		this.radius = Math.random() * 2;
+	}
+
+	Dot.prototype = {
+		create: function(){
+			ctx.beginPath();
+			ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+			ctx.fill();
+		},
+
+		animate: function() {
+			for(i = 0; i < dots.num; i++){
+
+				var dot = dots.array[i];
+
+				if(dot.y < 0 || dot.y > h){
+					dot.vx = dot.vx;
+					dot.vy = - dot.vy;
+				}
+				else if(dot.x < 0 || dot.x > w){
+					dot.vx = - dot.vx;
+					dot.vy = dot.vy;
+				}
+				dot.x += dot.vx;
+				dot.y += dot.vy;
+			}
+		},
+
+		line: function() {
+			for(i = 0; i < dots.num; i++){
+				for(j = 0; j < dots.num; j++){
+					i_dot = dots.array[i];
+					j_dot = dots.array[j];
+
+					if((i_dot.x - j_dot.x) < dots.distance && (i_dot.y - j_dot.y) < dots.distance && (i_dot.x - j_dot.x) > - dots.distance && (i_dot.y - j_dot.y) > - dots.distance){
+						if((i_dot.x - mousePosition.x) < dots.d_radius && (i_dot.y - mousePosition.y) < dots.d_radius && (i_dot.x - mousePosition.x) > - dots.d_radius && (i_dot.y - mousePosition.y) > - dots.d_radius){
+							ctx.beginPath();
+							ctx.moveTo(i_dot.x, i_dot.y);
+                   ctx.bezierCurveTo(i_dot.x, (h / 2), (w / 2), i_dot.y, j_dot.x, j_dot.y);
+							ctx.stroke();
+							ctx.closePath();
+						}
+					}
+				}
+			}
+		}
+	};
+
+	function createDots(){
+		ctx.clearRect(0, 0, w, h);
+		for(i = 0; i < dots.num; i++){
+			dots.array.push(new Dot());
+			dot = dots.array[i];
+
+			dot.create();
+		}
+
+		dot.line();
+		dot.animate();
+	}
+
+	$('canvas').on('mousemove mouseleave', function(e){
+		if(e.type == 'mousemove'){
+			mousePosition.x = e.pageX;
+			mousePosition.y = e.pageY;
+		}
+		if(e.type == 'mouseleave'){
+			mousePosition.x = w / 2;
+			mousePosition.y = h / 2;
+		}
+	});
+
+  $('canvas').on('click', function(){
+		dots.num += 10;
+	});
+
+	setInterval(createDots, 1000/30);
+
+  $(window).on('resize', function() {
+    canvas.width = w;
+    canvas.height = h;
+    ctx.fillStyle = color;
+    ctx.lineWidth = .1;
+    ctx.strokeStyle = color;
+  });
+});
+</script>
+</body>
+</html>

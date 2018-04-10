@@ -1,0 +1,130 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name"viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=1.0, user-scalable=no">
+<title> Pangea</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="animate.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/2014.01.31/classList.min.js" type="text/javascript"></script>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+
+</head>
+<body>
+<a href="index.html" class="logo">P</a>
+<a id="hamburger-icon" href="#" class="open-close-btn">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</a>
+<div id="myNav" class="overlay">
+<div class="overlay-content">
+<a href="#">***</a>
+<a href="company.html">company</a>
+<a href="contact.html">contact</a>
+</div>
+</div>
+<!------------------------------------------------------>
+<div id="">
+  <div class="centered">
+    <h1 class="animated bounceInDown">what we do</h1>
+    <div>
+      <h4>*Web Development*
+      </h4>
+    </div>
+    <div>
+      <h4>*Web design*
+      </h4>
+    </div>
+    <div>
+      <h5>*branding*
+      </h5>
+    </div>
+  </div>
+</div>
+<!------------------------------------------------->
+<div style="font-size:30px">
+<h3>Design</h3>
+<ul>
+  <li>
+    Corporate Design
+  </li>
+  <li>
+    Website design prototype
+  </li>
+  <li>
+    UI/UX design
+  </li>
+  <li>
+    Graphic design
+  </li>
+</ul>
+<h3>Development</h3>
+<ul>
+  <li>
+    Corporate websites
+  </li>
+  <li>
+    Responsive  websites
+  </li>
+  <li>
+    SEO
+  </li>
+  <li>
+    Social media marketing
+  </li>
+</ul>
+</div>
+<section id="contact" class="section">
+<div class="centered">
+<div class="container">
+  <div class="inner">
+    <div class="panel panel-left">
+      <div class="panel-content">
+        <div class="image-background"><h2 style="color:black">This can be an image</h2>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-right">
+      <div class="panel-content">
+        <div class="form">
+          <h1>Leave a comment</h1>
+          <div class="group">
+            <input type="text" required>
+            <span class="highlight"></span>
+            <label>Your name</label>
+          </div>
+          <div class="group">
+            <input type="text" required>
+            <span class="highlight"></span>
+            <label>Your email</label>
+          </div>
+          <a class="send-btn">Send</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+<div class="footer-copyright default_color">
+<div>Made by Asurias</div></div>
+<script>
+$(document).ready(function(){
+$(".open-close-btn").on('click touchstart', function(e) {
+e.preventDefault();
+$(".overlay").toggleClass("overlay-open");
+$("#hamburger-icon").toggleClass("hamburger-open");
+});
+$('section').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+$('section').addClass('delay fadeOutRight');});
+});
+$(function() {
+
+});
+</script>
+</body>
+</html>
